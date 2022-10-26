@@ -1,9 +1,33 @@
 import site
 import os
 import shutil
+import quanturf_logo
 os.system("pip install jupyterlab_templates")
 os.system("jupyter labextension install jupyterlab_templates")
 os.system("jupyter serverextension enable --py jupyterlab_templates")
+
+def get_js_file(site_package_dir,logo_code):
+    os.chdir(site_package_dir)
+    os.chdir("../")
+    os.chdir("../")
+    env_dir=os.getcwd()
+    src_file_path=os.path.join(env_dir,"share","jupyter","labextensions","jupyterlab_templates","static","568.a78b0ab164b288ecdc23.js")
+    src_file_path = src_file_path.replace(os.sep, '/')
+    src_file=open(src_file_path,"w")
+    src_file.write(logo_code)
+    src_file.close()
+    return
+
+site_package_dir=site.getsitepackages()
+
+if len(site_package_dir) == 1:
+    logo_code=quanturf_logo.logo_js()
+    site_package_dir=' '.join(site_package_dir)
+    get_js_file(site_package_dir,logo_code)
+
+if len(site_package_dir) >= 2:
+    logo_code=quanturf_logo.logo_js()
+    get_js_file(site_package_dir[1],logo_code)
 
 
 def main():
