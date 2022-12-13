@@ -1,7 +1,7 @@
 import site
 import os
 import shutil
-import quanturf_logo
+from . import quanturf_logo
 os.system("pip install jupyterlab_templates")
 os.system("jupyter labextension install jupyterlab_templates")
 os.system("jupyter serverextension enable --py jupyterlab_templates")
